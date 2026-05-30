@@ -1,0 +1,40 @@
+name: Payment Service CI
+
+on:
+  pull_request:
+    branches:
+      - main
+
+  push:
+    branches:
+      - develop
+      - 'feature/**'
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - name: Compile Application
+        run: ./mvnw clean compile
+
+      - name: Run Unit Tests
+        run: ./mvnw test
+         
+        - name: Debug Maven Wrapper
+           run: |
+                pwd
+                ls -la
+                stat mvnw || true
+                file mvnw || true
