@@ -11,7 +11,6 @@ on:
       - main
 
 jobs:
-
   build:
 
     runs-on: ubuntu-latest
@@ -32,6 +31,9 @@ jobs:
 
       - name: Verify Maven
         run: mvn -version
+
+      - name: Print Dependencies
+        run: mvn dependency:tree
 
       - name: Compile Application
         run: mvn clean compile
